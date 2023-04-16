@@ -6,11 +6,15 @@ import time
 
 TOPIC = "clients/temporiz"
 
+def timer(mqttc,msg):
+    TimTopMsg = msg.payload.split(", ")#Recibe el mensaje que deberá ser mandado tiempo, topic, mensaje
+    sleep(float(TimTopMsg[0]))
+    mqttc.publish(TimTopMsg[1], TimTopMsg[2])
+
 def on_message(mqttc, data, msg):
     try:
-        TimTopMsg = msg.payload.split(", ")#Recibe el mensaje que deberá ser mandado tiempo, topic, mensaje
-        sleep(int(TimTopMsg[0]))
-        mqttc.publish(TimTopMsg[1], TimTopMsg[2])
+        p = Process(target= timer, args=(mqttc, msg)) 
+        p.start()
     except Exception as e:
         print(e)
     
