@@ -25,7 +25,7 @@ def main(broker):
     mqttc = Client(userdata=data)
     mqttc.on_message = on_message
     mqttc.connect(broker)
-    mqttc.subscribe('temperature/t1')
+    mqttc.subscribe('temperature/#')
     mqttc.loop_start()
     while True:
         sleep(5)

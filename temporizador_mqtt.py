@@ -7,7 +7,7 @@ import time
 TOPIC = "clients/temporiz"
 
 def timer(mqttc,msg):
-    TimTopMsg = msg.payload.split(", ")#Recibe el mensaje que deberá ser mandado tiempo, topic, mensaje
+    TimTopMsg = msg.payload.split(", ")#Recibe el mensaje que deberá ser mandado "tiempo, topic, mensaje"
     sleep(float(TimTopMsg[0]))
     mqttc.publish(TimTopMsg[1], TimTopMsg[2])
 
